@@ -1,0 +1,36 @@
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        l1=[]
+        l2=[]
+        for i in range(len(a)):
+            l1.append(int(a[i]))
+        for j in range(len(b)):
+            l2.append(int(b[j]))
+        
+        if len(l1)>len(l2):
+            for i in range(len(l2)):
+                l1[len(l1)-i-1]=l1[len(l1)-i-1]+l2[len(l2)-i-1]
+            l3=l1
+        else:
+            for i in range(len(l1)):
+                l2[len(l2)-i-1]=l2[len(l2)-i-1]+l1[len(l1)-i-1]
+            l3=l2
+        
+        for i in range(len(l3)):
+            if len(l3)-i-1>0:
+                temp=l3[len(l3)-i-1]
+                l3[len(l3)-i-1]=l3[len(l3)-i-1]%2
+                temp=int(temp/2)
+                l3[len(l3)-i-2]=l3[len(l3)-i-2]+temp
+            else:
+                temp=l3[len(l3)-i-1]
+                while temp>=2:
+                    l3[0]=temp%2
+                    l3.insert(0,int(temp/2))
+                    temp=int(temp/2)
+                    
+        res=""            
+        for i in range(len(l3)): 
+            res=res+str(l3[i])
+
+        return res
